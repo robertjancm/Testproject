@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7fb">
+    <title>Taskflow — Kanban board</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#" aria-label="Taskflow home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>taskflow</span>
+        </a>
+
+        <div class="workspace-label">WORKSPACE</div>
+        <button class="workspace-switcher" type="button">
+          <span class="workspace-avatar">S</span>
+          <span class="workspace-name">Studio North<small>Free workspace</small></span>
+          <span class="switcher-chevron" aria-hidden="true">⌄</span>
+        </button>
+
+        <nav class="main-nav">
+          <a class="nav-link" href="#board"><span class="nav-icon" aria-hidden="true">▦</span>Overview</a>
+          <a class="nav-link active" href="#board" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span>My board</a>
+          <a class="nav-link" href="#board"><span class="nav-icon" aria-hidden="true">◷</span>Activity</a>
+        </nav>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-heading">YOUR SPACE <button type="button" aria-label="Add a space">+</button></div>
+          <a class="space-link" href="#board"><span class="space-dot purple"></span>Product launch</a>
+          <a class="space-link" href="#board"><span class="space-dot green"></span>Website refresh</a>
+          <a class="space-link" href="#board"><span class="space-dot orange"></span>Onboarding</a>
+        </div>
+
+        <div class="sidebar-bottom">
+          <div class="upgrade-card">
+            <div class="upgrade-sparkle" aria-hidden="true">✳</div>
+            <strong>Make space for big ideas</strong>
+            <p>Bring your whole team together in one place.</p>
+            <button type="button">Explore plans <span aria-hidden="true">→</span></button>
+          </div>
+          <button class="profile-button" type="button">
+            <span class="profile-avatar">JD</span>
+            <span class="profile-name">Jordan Davis<small>Personal workspace</small></span>
+            <span class="switcher-chevron" aria-hidden="true">···</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content" id="board">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>My boards</span><span aria-hidden="true">/</span><strong>Product launch</strong></div>
+          <div class="topbar-actions">
+            <button class="icon-button help-button" type="button" aria-label="Help">?</button>
+            <button class="icon-button notification-button" type="button" aria-label="Notifications">♧<i></i></button>
+            <span class="topbar-avatar" aria-label="Jordan Davis">JD</span>
+          </div>
+        </header>
+
+        <section class="board-content" aria-labelledby="board-title">
+          <div class="board-heading">
+            <div>
+              <div class="eyebrow"><span class="board-indicator"></span> PRODUCT TEAM <span class="eyebrow-divider">·</span> THIS WEEK</div>
+              <h1 id="board-title">Product launch <button class="title-menu" type="button" aria-label="Board options">···</button></h1>
+              <p class="board-subtitle">A little progress each day adds up to big results.</p>
+            </div>
+            <button class="primary-button" id="new-task-button" type="button"><span aria-hidden="true">＋</span> New task</button>
+          </div>
+
+          <div class="board-toolbar">
+            <div class="board-members" aria-label="Board members">
+              <span class="member-avatar member-one" title="Jordan Davis">JD</span>
+              <span class="member-avatar member-two" title="Alex Morgan">AM</span>
+              <span class="member-avatar member-three" title="Sam Lee">SL</span>
+              <button class="add-member" type="button" aria-label="Add a member">+</button>
+              <span class="member-count">+2</span>
+            </div>
+            <div class="toolbar-controls">
+              <label class="search-box">
+                <span aria-hidden="true">⌕</span>
+                <input id="search-input" type="search" placeholder="Search tasks..." aria-label="Search tasks">
+                <kbd>⌘ K</kbd>
+              </label>
+              <label class="filter-select">
+                <span aria-hidden="true">▽</span>
+                <select id="priority-filter" aria-label="Filter by priority">
+                  <option value="all">All priorities</option>
+                  <option value="high">High priority</option>
+                  <option value="medium">Medium priority</option>
+                  <option value="low">Low priority</option>
+                </select>
+              </label>
+              <button class="view-button" type="button" aria-label="Board view">▤ <span>Board</span>⌄</button>
+            </div>
+          </div>
+
+          <div class="board-columns" id="board-columns" aria-label="Kanban board">
+            <section class="board-column" data-status="todo" aria-labelledby="todo-title">
+              <div class="column-heading">
+                <div class="column-title-wrap"><span class="column-dot todo-dot"></span><h2 id="todo-title">To do</h2><span class="column-count" data-count="todo">0</span></div>
+                <button class="column-menu" type="button" aria-label="To do options">···</button>
+              </div>
+              <div class="task-list" data-list="todo"></div>
+              <button class="add-task-button" data-add-status="todo" type="button"><span>＋</span> Add task</button>
+            </section>
+
+            <section class="board-column" data-status="inprogress" aria-labelledby="inprogress-title">
+              <div class="column-heading">
+                <div class="column-title-wrap"><span class="column-dot progress-dot"></span><h2 id="inprogress-title">In progress</h2><span class="column-count" data-count="inprogress">0</span></div>
+                <button class="column-menu" type="button" aria-label="In progress options">···</button>
+              </div>
+              <div class="task-list" data-list="inprogress"></div>
+              <button class="add-task-button" data-add-status="inprogress" type="button"><span>＋</span> Add task</button>
+            </section>
+
+            <section class="board-column" data-status="done" aria-labelledby="done-title">
+              <div class="column-heading">
+                <div class="column-title-wrap"><span class="column-dot done-dot"></span><h2 id="done-title">Done</h2><span class="column-count" data-count="done">0</span></div>
+                <button class="column-menu" type="button" aria-label="Done options">···</button>
+              </div>
+              <div class="task-list" data-list="done"></div>
+              <button class="add-task-button" data-add-status="done" type="button"><span>＋</span> Add task</button>
+            </section>
+          </div>
+
+          <footer class="board-footer"><span class="footer-check" aria-hidden="true">✓</span><span id="board-summary">Everything in one place. Let's make it happen.</span><span class="footer-shortcut">Tip: drag tasks between columns to update their status</span></footer>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title">
+      <form id="task-form">
+        <div class="dialog-header">
+          <div><div class="dialog-eyebrow">PRODUCT LAUNCH</div><h2 id="dialog-title">Create a task</h2></div>
+          <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <input id="task-id" name="id" type="hidden">
+        <label class="form-field">Task name <span>*</span><input id="task-title" name="title" type="text" maxlength="100" placeholder="e.g. Prepare launch announcement" required></label>
+        <label class="form-field">Description <textarea id="task-description" name="description" rows="3" maxlength="500" placeholder="Add a few details about this task..."></textarea></label>
+        <div class="form-row">
+          <label class="form-field">Status
+            <select id="task-status" name="status">
+              <option value="todo">To do</option>
+              <option value="inprogress">In progress</option>
+              <option value="done">Done</option>
+            </select>
+          </label>
+          <label class="form-field">Priority
+            <select id="task-priority" name="priority">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label class="form-field">Assignee <input id="task-assignee" name="assignee" type="text" maxlength="30" placeholder="e.g. Jordan"></label>
+          <label class="form-field">Due date <input id="task-due" name="dueDate" type="date"></label>
+        </div>
+        <div class="dialog-actions"><button class="delete-button" id="delete-task-button" type="button">Delete task</button><div><button class="cancel-button" type="button">Cancel</button><button class="primary-button save-button" type="submit">Create task</button></div></div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
